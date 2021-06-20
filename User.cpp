@@ -78,7 +78,7 @@ void User::Open(string fileName, string mode) {
     }
     int md = FileMode(mode);
     if (md == 0) {
-        cout << "this mode is undefined ! \n";
+        cout << "Open参数错误！\n";
         return;
     }
 
@@ -86,12 +86,12 @@ void User::Open(string fileName, string mode) {
     u_FileManager->Open();
     if (IsError())
         return;
-    cout << "open success, return fd=" << u_ar0[EAX] << endl;
+    cout << "打开文件成功，返回的句柄fd是：" << u_ar0[EAX] << endl;
 }
 
 void User::Close(string sfd) {
     if (sfd.empty() || !isdigit(sfd.front())) {
-        cout << "parameter fd can't be empty or be nonnumeric ! \n";
+        cout << "Close参数错误！\n";
         return;
     }
     u_arg[0] = stoi(sfd);;
@@ -101,15 +101,15 @@ void User::Close(string sfd) {
 
 void User::Seek(string sfd, string offset, string origin) {
     if (sfd.empty() || !isdigit(sfd.front())) {
-        cout << "parameter fd can't be empty or be nonnumeric ! \n";
+        cout << "Seek参数错误！\n";
         return;
     }
     if (offset.empty()) {
-        cout << "parameter offset can't be empty ! \n";
+        cout << "Seek参数错误！\n";
         return;
     }
     if (origin.empty() || !isdigit(origin.front())) {
-        cout << "parameter origin can't be empty or be nonnumeric ! \n";
+        cout << "Seek参数错误！\n";
         return;
     }
     u_arg[0] = stoi(sfd);
@@ -121,21 +121,21 @@ void User::Seek(string sfd, string offset, string origin) {
 
 void User::Write(string sfd, string inFile, string size) {
     if (sfd.empty() || !isdigit(sfd.front())) {
-        cout << "parameter fd can't be empty or be nonnumeric ! \n";
+        cout << "write参数错误！\n";
         return;
     }
     int fd = stoi(sfd);
 
     int usize;
     if (size.empty() || (usize = stoi(size)) < 0) {
-        cout << "parameter size must be greater or equal than 0 ! \n";
+        cout << "write参数错误！\n";
         return;
     }
 
     char* buffer = new char[usize];
     fstream fin(inFile, ios::in | ios::binary);
     if (!fin) {
-        cout << "file " << inFile << " open failed ! \n";
+        cout << "打开输入文件  " << inFile << " 失败！\n";
         return;
     }
     fin.read(buffer, usize);
@@ -148,20 +148,20 @@ void User::Write(string sfd, string inFile, string size) {
 
     if (IsError())
         return;
-    cout << "write " << u_ar0[User::EAX] << "bytes success !" << endl;
+    cout << "向句柄写入 " << u_ar0[User::EAX] << "字节成功！" << endl;
     delete[]buffer;
 }
 
 void User::Read(string sfd, string outFile, string size) {
     if (sfd.empty() || !isdigit(sfd.front())) {
-        cout << "parameter fd can't be empty or be nonnumeric ! \n";
+        cout << "read参数错误！ \n";
         return;
     }
     int fd = stoi(sfd);
 
     int usize;
     if (size.empty() || !isdigit(size.front()) || (usize = stoi(size)) < 0) {
-        cout << "parameter size is not right \n";
+        cout << "read参数错误！ \n";
         return;
     }
     char* buffer = new char[usize];
@@ -183,12 +183,12 @@ void User::Read(string sfd, string outFile, string size) {
     }
     fstream fout(outFile, ios::out | ios::binary);
     if (!fout) {
-        cout << "file " << outFile << " open failed ! \n";
+        cout << "打开输出文件 " << outFile << " 失败！ \n";
         return;
     }
     fout.write(buffer, u_ar0[User::EAX]);
     fout.close();
-    cout << "read to " << outFile << " done ! \n";
+    cout << "输出到文件 " << outFile << " 成功！ \n";
     delete[]buffer;
 }
 
@@ -252,7 +252,7 @@ bool User::checkPathName(string path) {
         q = u_dirp.find('/', p);
         q = min(q, (unsigned int)u_dirp.length());
         if (q - p > DirectoryEntry::DIRSIZ) {
-            cout << "the fileName or dirPath can't be greater than 28 size ! \n";
+            cout << "文件路径长度过大！ \n";
             return false;
         }
     }

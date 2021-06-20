@@ -27,4 +27,7 @@ extern FileManager globalFileManager;
 // 处理输入的命令行
 vector<string> getCmd(string str);
 
+// 进行对应的运算
+void exeCmd(vector<string> cmdList);
+
 #endif
