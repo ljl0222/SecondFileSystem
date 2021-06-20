@@ -1,5 +1,6 @@
 #include "common.h"
 #include <algorithm>
+#include <cstring>
 /*==============================class Inode===================================*/
 /*	预读块的块号，对普通文件这是预读块所在的物理块号。对硬盘而言，这是当前物理块（扇区）的下一个物理块（扇区）*/
 int Inode::rablock = 0;

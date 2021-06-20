@@ -2,6 +2,7 @@
 #include "BufferManager.h"
 #include "User.h"
 #include <iostream>
+#include <cstring>
 
 extern User globalUser;
 extern DeviceManager globalDeviceManager;
@@ -19,18 +20,22 @@ void BufferManager::Initialize()
 {
 	for (int i = 0; i < NBUF; ++i) 
 	{
-		if (i) {
+		if (i) 
+		{
 			m_Buf[i].b_forw = m_Buf + i - 1;
 		}
-		else {
+		else 
+		{
 			m_Buf[i].b_forw = bFreeList;
 			bFreeList->b_back = m_Buf + i;
 		}
 
-		if (i + 1 < NBUF) {
+		if (i + 1 < NBUF) 
+		{
 			m_Buf[i].b_back = m_Buf + i + 1;
 		}
-		else {
+		else 
+		{
 			m_Buf[i].b_back = bFreeList;
 			bFreeList->b_forw = m_Buf + i;
 		}
@@ -42,7 +47,7 @@ void BufferManager::Initialize()
 Buf* BufferManager::GetBlk(int blkno)
 {
 	Buf* bp;
-	User& u = globalUser;
+	// User& u = globalUser;
 
 	if (m_map.find(blkno) != m_map.end())
 	{
@@ -175,7 +180,7 @@ void BufferManager::Bdetach(Buf *bp)
 
 void BufferManager::Binsert(Buf* bp)
 {
-	if (bp->b_back == NULL) {
+	if (bp->b_back != NULL) {
 		return;
 	}
 

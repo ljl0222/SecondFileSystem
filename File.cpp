@@ -1,5 +1,5 @@
 #include "common.h"
-
+#include <cstring>
 /*==============================class File===================================*/
 File::File()
 {

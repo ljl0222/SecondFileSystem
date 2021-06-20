@@ -2,6 +2,7 @@
 #include "User.h"
 #include <time.h>
 #include <iostream>
+#include <cstring>
 extern User globalUser;
 extern DeviceManager globalDeviceManager;
 extern BufferManager globalBufferManager;

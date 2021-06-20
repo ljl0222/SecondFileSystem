@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+#include <cstring>
 using namespace std;
 
 
@@ -140,7 +141,6 @@ void User::Write(string sfd, string inFile, string size) {
     }
     fin.read(buffer, usize);
     fin.close();
-    //cout << "fd = " << fd << " inFile = " << inFile << " size = " << usize << "\n";
     u_arg[0] = fd;
     u_arg[1] = (long)buffer;
     u_arg[2] = usize;

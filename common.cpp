@@ -41,7 +41,9 @@ void exeCmd(vector<string> cmdList)
 		exit(0);
 	}
 	else if (cmd == "creat") {
-		globalUser.Mkdir(cmdList[1]);
+		// globalUser.Mkdir(cmdList[1]);
+		// cout << cmdList[1] << " " << cmdList[2] << endl;
+		globalUser.Create(cmdList[1], cmdList[2]);
 	}
 	else if (cmd == "open") {
 		globalUser.Open(cmdList[1], cmdList[2]);

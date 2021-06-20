@@ -1,5 +1,6 @@
 #include "common.h"
 #include <time.h>
+#include <cstring>
 
 #include <iostream>
 /*==============================class OpenFileTable===================================*/
