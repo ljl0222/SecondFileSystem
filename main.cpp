@@ -1,6 +1,7 @@
 
 #include "common.h"
 #include <iostream>
+
 bool DEBUG;
 
 
@@ -44,25 +45,30 @@ int main()
 			globalUser.Mkdir(cmdList[1]);
 		}
 		else if (cmd == "open") {
-			
+			globalUser.Open(cmdList[1], cmdList[2]);
 		}
 		else if (cmd == "read") {
-
+			if (cmdList[2] == "-o") {
+				globalUser.Read(cmdList[1], cmdList[3], cmdList[4]);
+			}
+			else {
+				globalUser.Read(cmdList[1], "", cmdList[2]);
+			}
 		}
 		else if (cmd == "write") {
-
+			globalUser.Write(cmdList[1], cmdList[2], cmdList[3]);
 		}
 		else if (cmd == "seek") {
-
+			globalUser.Seek(cmdList[1], cmdList[2], cmdList[3]);
 		}
 		else if (cmd == "close") {
-
+			globalUser.Close(cmdList[1]);
 		}
 		else if (cmd == "mkdir") {
 			globalUser.Mkdir(cmdList[1]);
 		}
 		else if (cmd == "rm") {
-
+			globalUser.Delete(cmdList[1]);
 		}
 		else if (cmd == "ls") {
 			globalUser.Ls();
